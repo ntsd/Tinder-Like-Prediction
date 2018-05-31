@@ -4,19 +4,9 @@ import os
 import dlib
 import glob
 
-if len(sys.argv) != 3:
-    print(
-        "Give the path to the trained shape predictor model as the first "
-        "argument and then the directory containing the facial images.\n"
-        "For example, if you are in the python_examples folder then "
-        "execute this program by running:\n"
-        "    ./face_landmark_detection.py shape_predictor_68_face_landmarks.dat ../examples/faces\n"
-        "You can download a trained facial shape predictor from:\n"
-        "    http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2")
-    exit()
 
 predictor_path = "shape_predictor_68_face_landmarks.dat"
-faces_folder_path = r"C:\Users\Jiravat\Desktop\git\Tinder-Like-Prediction\featureExtraction\image"#sys.argv[2]
+faces_folder_path = "image/"#sys.argv[2]
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(predictor_path)
@@ -25,6 +15,7 @@ win = dlib.image_window()
 for f in glob.glob(os.path.join(faces_folder_path, "*.jpg")):
     print("Processing file: {}".format(f))
     img = dlib.load_rgb_image(f)
+
 
     win.clear_overlay()
     win.set_image(img)
@@ -39,10 +30,15 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.jpg")):
             k, d.left(), d.top(), d.right(), d.bottom()))
         # Get the landmarks/parts for the face in box d.
         shape = predictor(img, d)
+        print(shape)
         print("Part 0: {}, Part 1: {} ...".format(shape.part(0),
                                                   shape.part(1)))
+       	print(shape.parts(), len(shape.parts()))
+
         # Draw the face landmarks on the screen.
         win.add_overlay(shape)
 
     win.add_overlay(dets)
+
     dlib.hit_enter_to_continue()
+    # break
