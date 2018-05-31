@@ -1,13 +1,46 @@
 import cv2
+import numpy as np
+from Feature import Feature
 from sklearn.preprocessing import normalize
+from loadFacePath import loadFaceData
+from sklearn.neighbors.nearest_centroid import NearestCentroid
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score
+
 def norm_size(img_path, points):
-    img = cv2.imread(img_path)x
+    img = cv2.imread(img_path)
     height, width, _ = img.shape
-    return [ (point[0]/width, point[1]/height) for point in points]
+    print(height, width)
+    return [ (point.x/width, point.y/height) for point in points]
 
 
 if __name__ == "__main__":
-    ar = [(540, 218), (541, 245), (544, 272), (548, 299), (559, 324), (577, 344), (598, 361), (624, 373), (653, 376), (681, 372), (704, 358), (725, 341), (740, 320), (748, 296), (751, 270), (752, 243), (752, 216), (563, 198), (574, 182), (593, 172), (614, 173), (634, 177), (664, 174), (684, 168), (705, 169), (723, 180), (733, 197), (650, 202), (651, 220), (652, 237), (653, 254), (629, 269), (640, 272), (653, 275), (664, 272), (675, 269), (588, 208), (599, 202), (611, 202), (622, 209), (611, 210), (599, 210), (678, 209), (689, 202), (700, 203), (710, 209), (701, 210), (689, 210), (605, 300), (625, 297), (641, 296), (652, 297), (664, 295), (679, 296), (695, 299), (679, 309), (665, 314), (653, 316), (641, 315), (625, 310), (612, 302), (641, 302), (652, 303), (664, 302), (688, 300), (665, 303), (653, 305), (642, 303)]
-    print(norm_size("./image/too/CiHZjUdJ5HPNXJ92GP9Rlxhnukf02zyadc.jpg", ar)[0])
+    f = Feature()
+    paths, classes = loadFaceData('face.csv')
+    X = []
+    y = []
+    for index, path in enumerate(paths):
+        ar = f.getFeature(path)
+        if ar == None:
+            continue
+        norm_arr = norm_size(path, ar)
+        X.append(norm_arr)
+        y.append(classes[index])
+        if index == 10:
+            break
+    # print(y)
+    # print(X)
+    X = np.array(X)
+    y = np.array(y)
+    print(X.shape)
+    print(X)
+    print(X.reshape(11, 136))
+    X_train_data, X_test_data, y_train_data, y_test_data = train_test_split(X, y, test_size=0.3, stratify=y)
+    nearestCentroid = NearestCentroid()
+    nearestCentroid.fit(X_train_data, y_train_data)
 
+    predict_y = nearestCentroid.predict(X_test_data)
+    f1Score = f1_score(y_test_data, predict_y, average='macro')
 
+    print(f1Score)
+    

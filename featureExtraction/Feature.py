@@ -17,12 +17,15 @@ class Feature:
 		shape = self.predictor(img, rect)
 		return shape.parts()
 
-	def show():
+	def show(self):
 		pass
 
 	def getFeature(self, path):
 		img = dlib.load_rgb_image(path)
-		rectFace = self.getBigestFaceRect(self.getFaceRects(img))
+		rect_faces = self.getFaceRects(img)
+		if not rect_faces:
+			return None
+		rectFace = self.getBigestFaceRect(rect_faces)
 		faceShape = self.getFaceShape(img, rectFace)
 		return faceShape
 
