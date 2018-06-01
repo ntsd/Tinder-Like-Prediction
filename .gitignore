@@ -1,2 +1,4 @@
 
 *.db
+
+featureExtraction/__pycache__/
