@@ -2,3 +2,9 @@
 *.db
 
 featureExtraction/__pycache__/
+.DS_Store
+*.pyc
+/featureExtraction/dataset/facial_landmark
+/featureExtraction/dataset/Images
+/.vscode
+*.ipynb
