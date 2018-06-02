@@ -14,13 +14,17 @@ def preprocess(paths, classes):
     f = Feature()
     X = []
     y = []
+    start = time.clock()
     for index, path in enumerate(paths):
-        print('preprocessing', index, path)
+        print('Preprocessing', index, path)
         ar = f.getFeature(path)
         if ar.all() == 0:
             continue
         X.append(ar)
         y.append(classes[index])
+
+    test_time = time.clock()-start
+    print("Preprocessing Total time: {0:.2f}".format(test_time))
     X = np.array(X)
     y = np.array(y)
     return X, y
@@ -28,12 +32,10 @@ def preprocess(paths, classes):
 def scut_fbp_test():
     f = Feature()
     # af1and5 0.890287769784
-    paths, classes = loadFaceData('./dataset/af1and5.csv') # './dataset/all(round_score).csv' for full class
+    paths, classes = loadFaceData('./dataset/af1and5.csv', nrows=100) # './dataset/all(round_score).csv' for full class
     X = []
     y = []
     for index, path in enumerate(paths):
-        if index>1000 and 0:
-            break
         ar = f.getFeature(path)
         print(index, path)
         if ar.all() == 0:
@@ -57,12 +59,10 @@ def scut_fbp_test():
 
 def flw_dataset_classify():
     f = Feature()
-    paths, classes = loadFaceData('face.csv')
+    paths, classes = loadFaceData('face.csv', nrows=82)
     X = []
     y = []
     for index, path in enumerate(paths):
-        if index == 82:
-            break
         ar = f.getFeature(path)
         print(index, path)
         if ar.all() == 0:
