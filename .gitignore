@@ -8,3 +8,4 @@ featureExtraction/__pycache__/
 /featureExtraction/dataset/Images
 /.vscode
 *.ipynb
+*.npy

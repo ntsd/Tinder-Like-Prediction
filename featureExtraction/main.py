@@ -17,7 +17,7 @@ from sklearn.metrics import roc_auc_score, log_loss, accuracy_score
 def scut_fbp_test():
 	new_dataset=1
 	if new_dataset:
-		df = pd.read_csv('./dataset/af1and5.csv', nrows=100)
+		df = pd.read_csv('./dataset/af1and5.csv', nrows=10)
 		paths = df['path']
 		classes = df['class']
 		X, y = preprocess(paths, classes)
