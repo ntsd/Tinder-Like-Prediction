@@ -1,8 +1,18 @@
 import pandas as pd
+import sys
 
 if __name__ == "__main__":
     df = pd.read_csv("All_Ratings.csv")
-    df = df[df.Filename.str.contains("AF")]
+    df = df[df.Filename.str.contains("AF")] # only asian female
+    df = df.loc[(df['Rating'] == 1) | (df['Rating'] == 5)] # filter only 1 and 5
+    # get all rating
+    df.Filename = './dataset/Images/' + df.Filename # add path to Filename
+    df = df.filter(items=['Filename', 'Rating']) #filter only Filename Rating column
+    df.columns = ['path', 'class'] # rename column
+    df.to_csv('af1and5.csv')
+    sys.exit(0)
+
+    # get mean rating of reviewer
     filenames = df.Filename.unique() # one image has arround 60 reviewer
     lis = []
     for filename in filenames:

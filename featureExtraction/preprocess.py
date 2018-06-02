@@ -12,10 +12,13 @@ from sklearn.svm import LinearSVC
 
 def scut_fbp_test():
     f = Feature()
-    paths, classes = loadFaceData('./dataset/all.csv')
+    # af1and5 0.935483870968
+    paths, classes = loadFaceData('./dataset/af1and5.csv') # './dataset/all(round_score).csv' for full class
     X = []
     y = []
     for index, path in enumerate(paths):
+        if index>100:
+            break
         ar = f.getFeature(path)
         print(index, path)
         if ar.all() == 0:

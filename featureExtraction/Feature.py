@@ -94,9 +94,8 @@ class Feature:
 		normShape = self.norm_size(path, faceShape)
 		# Features
 		features = self.shape_to_directions_feature(normShape)
-		features = self.shape_to_distance_feature(normShape)
-		features = list(self.hog_feature(img, rectFace))
-		features = list(self.hog_feature(img, rectFace)) + self.shape_to_directions_feature(normShape) + self.shape_to_distance_feature(normShape)
+		features = features + self.shape_to_distance_feature(normShape)
+		features = features + list(self.hog_feature(img, rectFace))
 		return features
 
 	def getFeature(self, path):
