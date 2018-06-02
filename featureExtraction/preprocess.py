@@ -1,4 +1,5 @@
 import cv2
+import time
 import numpy as np
 import pandas as pd
 from Feature import Feature
@@ -9,6 +10,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error
 from sklearn.svm import LinearSVC, SVC
+
 
 def preprocess(paths, classes):
     f = Feature()

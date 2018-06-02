@@ -16,11 +16,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score, log_loss, accuracy_score
 
 def scut_fbp_test():
-    new_dataset=0
+    new_dataset=1
     if new_dataset:
-        df = pd.read_csv('./dataset/af1and5.csv', nrows=10)
+        df = pd.read_csv('./dataset/af1and5.csv', nrows=100)
         paths = df['path']
-        lasses = df['class']
+        classes = df['class']
         X, y = preprocess(paths, classes)
         np.save('X', X)
         np.save('y', y)
@@ -67,4 +67,4 @@ def cross_validation():
 
 
 if __name__ == '__main__':
-    cross_validation()
+    scut_fbp_test()
