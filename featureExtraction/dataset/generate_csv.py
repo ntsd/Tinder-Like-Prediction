@@ -8,6 +8,7 @@ if __name__ == "__main__":
     # get all rating
     df.Filename = './dataset/Images/' + df.Filename # add path to Filename
     df = df.filter(items=['Filename', 'Rating']) #filter only Filename Rating column
+    df = df.drop_duplicates('Filename') # use drop duplicate file name
     df.columns = ['path', 'class'] # rename column
     df.to_csv('af1and5.csv')
     sys.exit(0)
