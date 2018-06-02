@@ -70,15 +70,11 @@ class Feature:
 	def norm_size(self, img_path, points):
 		img = cv2.imread(img_path)
 		height, width, _ = img.shape
-		# print(height, width)
 		return [ [point.x/width, point.y/height] for point in points]
 
 	def hog_feature(self, img, faceRect):
-		# print(faceRect.tl_corner().x,faceRect.br_corner().x,faceRect.tl_corner().y,faceRect.br_corner().y)
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-		# print(img.shape)
 		crop_img = img[faceRect.tl_corner().y:faceRect.br_corner().y,faceRect.tl_corner().x:faceRect.br_corner().x]
-		# print(crop_img.shape)
 		img = cv2.resize(crop_img, (128, 128))
 		scale_cell = (8, 8) #(img.shape[0]//100, img.shape[1]//100)
 		fHOG1 = hog(img, orientations=8, pixels_per_cell=scale_cell)

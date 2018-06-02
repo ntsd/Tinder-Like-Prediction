@@ -1,8 +1,8 @@
 
 import pandas as pd
 
-def loadFaceData(path):
-	dataFrame = pd.read_csv(path)
+def loadFaceData(path, **args):
+	dataFrame = pd.read_csv(path, **args)
 	X = dataFrame['path']
 	y = dataFrame['class']
 	return X, y

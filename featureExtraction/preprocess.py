@@ -8,16 +8,31 @@ from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, accuracy_score, mean_absolute_error
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
+
+def preprocess(paths, classes):
+    f = Feature()
+    X = []
+    y = []
+    for index, path in enumerate(paths):
+        print('preprocessing', index, path)
+        ar = f.getFeature(path)
+        if ar.all() == 0:
+            continue
+        X.append(ar)
+        y.append(classes[index])
+    X = np.array(X)
+    y = np.array(y)
+    return X, y
 
 def scut_fbp_test():
     f = Feature()
-    # af1and5 0.935483870968
+    # af1and5 0.890287769784
     paths, classes = loadFaceData('./dataset/af1and5.csv') # './dataset/all(round_score).csv' for full class
     X = []
     y = []
     for index, path in enumerate(paths):
-        if index>100:
+        if index>1000 and 0:
             break
         ar = f.getFeature(path)
         print(index, path)

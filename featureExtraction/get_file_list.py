@@ -1,5 +1,3 @@
-
-
 import os
 
 def get_all_file_in_folder(path):
@@ -8,7 +6,7 @@ def get_all_file_in_folder(path):
             if file.endswith(".jpg") or file.endswith(".png"):
                 print(os.path.join(root, file).replace('\\', '/')+','+ root.split('\\')[-1])
 
-def get_all_file_in_folder_morethan(path, num=4):
+def get_all_file_in_folder_more_than(path, num=4):
     for root, dirs, files in os.walk(path):
         if len(files) < num:
             continue
@@ -18,4 +16,3 @@ def get_all_file_in_folder_morethan(path, num=4):
 
 if __name__ == '__main__':
     get_all_file_in_folder_morethan("image/lfw_onlya")
-    #delete_csv_file_in_folder('ghega-dataset\\')
