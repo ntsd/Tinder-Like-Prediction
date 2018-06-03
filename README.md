@@ -7,6 +7,8 @@ What is the meaning of beautiful? And how we teach computer to know it?
 
 - https://github.com/ageitgey/face_recognition for Face Recog + Shape Feature
 
+- https://github.com/fbessez/Tinder Tinder API
+
 - http://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf hog master race
   =======
 
