@@ -69,7 +69,7 @@ class Feature:
         img = face_recognition.load_image_file(path)
         face_rects = face_recognition.face_locations(img) # return (top, right, bottom, left)
         if len(face_rects) == 0: # if face not found use np zeroes shape 128 
-            return np.zeros(shape=(128))
+            return None
         features = np.array([])
 
         bigest_face_rect= self.getBigestFaceRect(face_rects)
