@@ -15,13 +15,26 @@ import fb_auth_token
 from Feature import Feature
 f = Feature()
 
-class profile:
-    def __init__(self, name, age, images, like, features):
+
+class Profile:
+    def __init__(self, _id, name, gender, age, images, features, bio, distance_mi, jobs):
+        self._id = _id
         self.name = name
+        self.gender = gender
         self.age = age
         self.images = images
-        self.like = like
         self.features = features
+        self.bio = bio
+        self.distance_mi = distance_mi
+        self.jobs = jobs
+
+
+    def __hash__(self):
+        return hash((self._id))
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)): return NotImplemented
+        return self._id == other._id
 
 @app.route('/login')
 def login():
